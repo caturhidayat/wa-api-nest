@@ -4,9 +4,10 @@ import { AppService } from './app.service';
 import { WasapService } from './wasap/wasap.service';
 import { WasapController } from './wasap/wasap.controller';
 import { WasapModule } from './wasap/wasap.module';
+import { HttpModule, HttpService } from '@nestjs/axios';
 
 @Module({
-  imports: [WasapModule],
+  imports: [WasapModule, HttpModule],
   controllers: [AppController, WasapController],
   providers: [AppService, WasapService],
 })
