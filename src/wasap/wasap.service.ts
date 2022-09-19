@@ -18,7 +18,7 @@ export class WasapService {
         },
         json: {
           phone_number: '6285155387624',
-          message: 'Hello from nest kirim wasap use got!!!🔥',
+          message: 'Hello from nest kirim wasap use got 🔥🔥🔥🥳',
           device_id: 'iphone-7-plus',
           message_type: 'text',
         },
