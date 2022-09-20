@@ -6,6 +6,7 @@ import { WasapController } from './wasap/wasap.controller';
 import { WasapModule } from './wasap/wasap.module';
 import { HttpModule } from '@nestjs/axios';
 import { ConfigModule } from '@nestjs/config';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { ConfigModule } from '@nestjs/config';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    ScheduleModule.forRoot(),
   ],
   controllers: [AppController, WasapController],
   providers: [AppService, WasapService],
