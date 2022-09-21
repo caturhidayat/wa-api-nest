@@ -19,7 +19,7 @@ export class WasapService {
         json: {
           phone_number: '6285155387624',
           message:
-            'Hello from nest wa use got & cron task schedule 🔥. this awesome 🎉',
+            'Hello from nest wa use cron task schedule 🔥. this awesome 🎉',
           device_id: 'iphone-7-plus',
           message_type: 'text',
         },
@@ -28,9 +28,8 @@ export class WasapService {
     console.log(kirimWasap);
   }
 
-  @Cron(CronExpression.EVERY_MINUTE)
-  taskScheduleSendMessage() {
-    // console.log(`this is task schedule log every 10 Second...`);
-    this.sendWasap();
-  }
+  // @Cron(CronExpression.EVERY_MINUTE)
+  // taskScheduleSendMessage() {
+  //   this.sendWasap();
+  // }
 }

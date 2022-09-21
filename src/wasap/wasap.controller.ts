@@ -1,9 +1,13 @@
 import { Controller, Get, Header } from '@nestjs/common';
+import { UtilService } from 'src/util/util.service';
 import { WasapService } from './wasap.service';
 
 @Controller('wasap')
 export class WasapController {
-  constructor(private wasapService: WasapService) {}
+  constructor(
+    private wasapService: WasapService,
+    private utilService: UtilService,
+  ) {}
   @Get()
   @Header(
     'Authorization',
@@ -14,13 +18,8 @@ export class WasapController {
     return this.wasapService.sendWasap();
   }
 
-  //   @Get('/ambil')
-  //   @Header(
-  //     'Authorization',
-  //     'Bearer v8,d/<dzoa{@q/nce.jAG,5OOMECGDz>96NPLa{c=95W1@6D-catur',
-  //   )
-  //   @Header('Content-Type', 'application/json')
-  //   getWasap() {
-  //     return this.wasapService.getMessage();
-  //   }
+  @Get('/users')
+  getWasap() {
+    return this.utilService.compareDate();
+  }
 }

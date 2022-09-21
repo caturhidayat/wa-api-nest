@@ -7,6 +7,10 @@ import { WasapModule } from './wasap/wasap.module';
 import { HttpModule } from '@nestjs/axios';
 import { ConfigModule } from '@nestjs/config';
 import { ScheduleModule } from '@nestjs/schedule';
+import { UtilService } from './util/util.service';
+import { UtilModule } from './util/util.module';
+import { PrismaService } from './prisma/prisma.service';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
@@ -16,8 +20,10 @@ import { ScheduleModule } from '@nestjs/schedule';
       isGlobal: true,
     }),
     ScheduleModule.forRoot(),
+    UtilModule,
+    PrismaModule,
   ],
   controllers: [AppController, WasapController],
-  providers: [AppService, WasapService],
+  providers: [AppService, WasapService, UtilService, PrismaService],
 })
 export class AppModule {}
