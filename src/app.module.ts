@@ -11,6 +11,7 @@ import { UtilService } from './util/util.service';
 import { UtilModule } from './util/util.module';
 import { PrismaService } from './prisma/prisma.service';
 import { PrismaModule } from './prisma/prisma.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { PrismaModule } from './prisma/prisma.module';
     ScheduleModule.forRoot(),
     UtilModule,
     PrismaModule,
+    UserModule,
   ],
   controllers: [AppController, WasapController],
   providers: [AppService, WasapService, UtilService, PrismaService],
