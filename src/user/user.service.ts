@@ -1,26 +1,58 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { User } from '@prisma/client';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { UserDto } from './dto/user.dto';
 
 @Injectable()
 export class UserService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  constructor(private prismaService: PrismaService) {}
+  async create(userDto: UserDto) {
+    const createUser = await this.prismaService.user.create({
+      data: {
+        id: userDto.id,
+        firstName: userDto.firstName,
+        lastName: userDto.lastName,
+        birthDate: userDto.birthDate,
+        phoneNumber: userDto.phoneNumber,
+        createAt: userDto.createAt,
+        updateAt: userDto.updateAt,
+      },
+    });
+    return createUser;
   }
 
-  findAll() {
-    return `This action returns all user`;
+  async findAll() {
+    const getAll = await this.prismaService.user.findMany();
+    return getAll;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: number) {
+    const getOne = await this.prismaService.user.findUnique({
+      where: { id },
+    });
+    return getOne;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: number, userDto: UserDto) {
+    const updateUser = await this.prismaService.user.update({
+      where: { id },
+      data: {
+        id: userDto.id,
+        firstName: userDto.firstName,
+        lastName: userDto.lastName,
+        birthDate: userDto.birthDate,
+        phoneNumber: userDto.phoneNumber,
+        createAt: userDto.createAt,
+        updateAt: userDto.updateAt,
+      },
+    });
+    return updateUser;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: number) {
+    const del = await this.prismaService.user.delete({
+      where: { id },
+    });
+    return del;
   }
 }
