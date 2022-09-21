@@ -6,7 +6,7 @@ import { UserDto } from './dto/user.dto';
 @Injectable()
 export class UserService {
   constructor(private prismaService: PrismaService) {}
-  async create(userDto: UserDto) {
+  async create(userDto: UserDto): Promise<User> {
     const createUser = await this.prismaService.user.create({
       data: {
         id: userDto.id,
@@ -33,7 +33,7 @@ export class UserService {
     return getOne;
   }
 
-  async update(id: number, userDto: UserDto) {
+  async update(id: number, userDto: UserDto): Promise<User> {
     const updateUser = await this.prismaService.user.update({
       where: { id },
       data: {
