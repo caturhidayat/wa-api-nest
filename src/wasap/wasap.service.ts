@@ -2,10 +2,16 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import got from 'got';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { UtilService } from 'src/util/util.service';
 
 @Injectable()
 export class WasapService {
-  constructor(private configService: ConfigService) {}
+  constructor(
+    private configService: ConfigService,
+    private prismaService: PrismaService,
+    private utilService: UtilService,
+  ) {}
 
   async sendWasap() {
     const prefixUrl = 'messages';
@@ -28,8 +34,8 @@ export class WasapService {
     console.log(kirimWasap);
   }
 
-  // @Cron(CronExpression.EVERY_MINUTE)
-  // taskScheduleSendMessage() {
-  //   this.sendWasap();
-  // }
+  @Cron(CronExpression.EVERY_MINUTE)
+  taskScheduleSendMessage() {
+    this.utilService.compareDate();
+  }
 }
