@@ -13,8 +13,22 @@ export class WasapService {
     private utilService: UtilService,
   ) {}
 
-  async sendWasap() {
+  async sendWasap(users) {
     const prefixUrl = 'messages';
+
+    const dataUser = users.map((user) => {
+      return user;
+    });
+    // const arrLength = users.length();
+
+    // for (const user in users) {
+    //   console.log(users);
+    //   console.log(users.firstName);
+    //   users[user];
+    // }
+
+    // console.log(dataUser);
+    console.log(dataUser[0].firstName);
 
     const kirimWasap = await got
       .post(`${this.configService.get<string>('BASE_URL')}${prefixUrl}`, {
@@ -23,9 +37,8 @@ export class WasapService {
           'Content-Type': 'application/json',
         },
         json: {
-          phone_number: '6285155387624',
-          message:
-            'Hello from nest wa use cron task schedule 🔥. this awesome 🎉',
+          phone_number: dataUser[0].phoneNumber,
+          message: `Hello ${dataUser[0].firstName} from nest wa use cron task schedule 🔥. this awesome 🎉`,
           device_id: 'iphone-7-plus',
           message_type: 'text',
         },
@@ -34,8 +47,21 @@ export class WasapService {
     console.log(kirimWasap);
   }
 
-  @Cron(CronExpression.EVERY_MINUTE)
-  taskScheduleSendMessage() {
-    this.utilService.compareDate();
+  @Cron(CronExpression.EVERY_10_MINUTES)
+  async taskScheduleSendMessage() {
+    const compareData = await this.utilService.compareDate().then((user) => {
+      setTimeout(() => {
+        // const users = user.map((user) => user);
+        // console.log(`Data User: ${users}`);
+        // this.sendWasap(users);
+        this.sendWasap(user);
+      }, 1000);
+    });
+    // .then(() => {
+    //   setTimeout((user: { firstName: any }) => {
+    //     console.log(`data compare`);
+    //     // this.sendWasap(compareData);
+    //   }, 1200);
+    // });
   }
 }

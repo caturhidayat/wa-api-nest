@@ -8,15 +8,15 @@ export class WasapController {
     private wasapService: WasapService,
     private utilService: UtilService,
   ) {}
-  @Get()
-  @Header(
-    'Authorization',
-    'Bearer v8,d/<dzoa{@q/nce.jAG,5OOMECGDz>96NPLa{c=95W1@6D-catur',
-  )
-  @Header('Content-Type', 'application/json')
-  sendWasap() {
-    return this.wasapService.sendWasap();
-  }
+  // @Get()
+  // @Header(
+  //   'Authorization',
+  //   'Bearer v8,d/<dzoa{@q/nce.jAG,5OOMECGDz>96NPLa{c=95W1@6D-catur',
+  // )
+  // @Header('Content-Type', 'application/json')
+  // sendWasap() {
+  //   return this.wasapService.sendWasap();
+  // }
 
   @Get('/users')
   getWasap() {

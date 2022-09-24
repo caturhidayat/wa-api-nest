@@ -17,25 +17,31 @@ export class UtilService {
       return user;
     });
 
-    function compare(data) {
-      const bulan = data.birthDate.getMonth() + 1;
-      const tanggal = data.birthDate.getDate();
-      if (
-        bulan === currentDate.getMonth() + 1 &&
-        tanggal === currentDate.getDate()
-      ) {
-        // console.log('match');
-        // console.log(
-        //   `${data.birthDate.getMonth() + 1}-${data.birthDate.getDate()}`,
-        // );
-        // return {
-        //   name: data.firstName,
-        //   birth: `${currentDate.getFullYear()}-${
-        //     data.birthDate.getMonth() + 1
-        //   }-${data.birthDate.getDate()}`,
-        // };
-        console.table(data);
-        return data;
+    function compare(user) {
+      const bulan = user.birthDate.getMonth() + 1;
+      const tanggal = user.birthDate.getDate();
+
+      try {
+        if (
+          bulan === currentDate.getMonth() + 1 &&
+          tanggal === currentDate.getDate()
+        ) {
+          // console.log('match');
+          // console.log(
+          //   `${data.birthDate.getMonth() + 1}-${data.birthDate.getDate()}`,
+          // );
+          // return {
+          //   name: data.firstName,
+          //   birth: `${currentDate.getFullYear()}-${
+          //     data.birthDate.getMonth() + 1
+          //   }-${data.birthDate.getDate()}`,
+          // };
+          console.table(user);
+          return user;
+        }
+      } catch (error) {
+        console.error(error);
+        console.log(`Tidak ada yang ulang tahun ditanggal ini`);
       }
     }
 
