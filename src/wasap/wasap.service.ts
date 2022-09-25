@@ -13,7 +13,20 @@ export class WasapService {
     private utilService: UtilService,
   ) {}
 
-  async sendWasap(users) {
+  @Cron(CronExpression.EVERY_5_MINUTES)
+  async taskScheduleSendMessage() {
+    const compareData = await this.utilService.compareDate().then((user) => {
+      setTimeout(() => {
+        if (!user) {
+          console.log(`Tidak ada yang ulang tahun`);
+        } else {
+          this.sendWasap(user);
+        }
+      }, 1000);
+    });
+  }
+
+  sendWasap(users) {
     const prefixUrl = 'messages';
 
     const dataUser = users.map((user) => {
@@ -30,7 +43,7 @@ export class WasapService {
     // console.log(dataUser);
     console.log(dataUser[0].firstName);
 
-    const kirimWasap = await got
+    const kirimWasap = got
       .post(`${this.configService.get<string>('BASE_URL')}${prefixUrl}`, {
         headers: {
           Authorization: this.configService.get<string>('WA_API_TOKEN'),
@@ -45,23 +58,5 @@ export class WasapService {
       })
       .json();
     console.log(kirimWasap);
-  }
-
-  @Cron(CronExpression.EVERY_10_MINUTES)
-  async taskScheduleSendMessage() {
-    const compareData = await this.utilService.compareDate().then((user) => {
-      setTimeout(() => {
-        // const users = user.map((user) => user);
-        // console.log(`Data User: ${users}`);
-        // this.sendWasap(users);
-        this.sendWasap(user);
-      }, 1000);
-    });
-    // .then(() => {
-    //   setTimeout((user: { firstName: any }) => {
-    //     console.log(`data compare`);
-    //     // this.sendWasap(compareData);
-    //   }, 1200);
-    // });
   }
 }
