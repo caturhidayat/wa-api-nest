@@ -36,8 +36,8 @@ export class UtilService {
           //     data.birthDate.getMonth() + 1
           //   }-${data.birthDate.getDate()}`,
           // };
-          console.log(user);
-          return user;
+          console.table(`Return User compare: ${user}`);
+          // return user;
         }
       } catch (error) {
         console.error(error);

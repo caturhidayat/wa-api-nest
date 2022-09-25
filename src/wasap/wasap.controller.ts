@@ -18,8 +18,8 @@ export class WasapController {
   //   return this.wasapService.sendWasap();
   // }
 
-  @Get('/users')
-  getWasap() {
-    return this.utilService.compareDate();
-  }
+  // @Get('/users')
+  // getWasap() {
+  //   return this.utilService.compareDate();
+  // }
 }
