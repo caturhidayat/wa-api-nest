@@ -6,7 +6,7 @@ import { MessageService } from 'src/message/message.service';
 export class CronService {
   constructor(private messageService: MessageService) {}
 
-  @Cron(CronExpression.EVERY_MINUTE)
+  @Cron(CronExpression.EVERY_DAY_AT_6AM)
   cronSendMessageBirthday() {
     this.messageService.birthdayUser();
   }
